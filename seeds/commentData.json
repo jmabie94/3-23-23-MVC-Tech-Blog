@@ -1,0 +1,32 @@
+[
+    {
+        "comment_text": "Has the story now begun?",
+        "post_id": 1,
+        "user_id": 2
+    },
+    {
+        "comment_text": "Who does she think she is?",
+        "post_id": 2,
+        "user_id": 1
+    },
+    {
+        "comment_text": "It's actually a man",
+        "post_id": 2,
+        "user_id": 2
+    },
+    {
+        "comment_text": "Live your life",
+        "post_id": 3,
+        "user_id": 1
+    },
+    {
+        "comment_text": "I don't want to :(",
+        "post_id": 3,
+        "user_id": 2
+    },
+    {
+        "comment_text": "Thanks, Alex :'(",
+        "post_id": 4,
+        "user_id": 2
+    }
+]

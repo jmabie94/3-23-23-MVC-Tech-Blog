@@ -1,14 +1,14 @@
 const router = require('express').Router();
-const { BlogPost } = require('../../models');
+const { Comment } = require('../../models');
 
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
     try {
-        const newBlogPost = await BlogPost.create({
+        const newComment = await Comment.create({
             ...req.body,
             user_id: req.session.user_id,
         });
 
-        res.status(200).json(newBlogPost);
+        res.status(200).json(newComment);
     } catch (err) {
         res.status(400).json(err);
     }
@@ -16,19 +16,19 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const blogPostData = await BlogPost.destroy({
+        const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
                 user_id: req.session.user_id,
             },
         });
 
-        if (!blogPostData) {
-            res.status(404).json({ message: 'No blog post found with this ID!' });
+        if (!commentData) {
+            res.status(404).json({ message: 'No Comment Exists With This ID!' });
             return;
         }
 
-        res.status(200).json(blogPostData);
+        res.status(200).json(commentData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -36,9 +36,9 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const blogPostData = await BlogPost.update(
+        const commentData = await Comment.update(
             {
-                description: req.body.description,
+                comment_text: req.body.comment_text,
             },
             {
                 where: {
@@ -48,12 +48,12 @@ router.put('/:id', async (req, res) => {
             }
         );
 
-        if (!blogPostData) {
-            res.status(404).json({ message: 'No blog post found with this ID!' });
+        if (!commentData) {
+            res.status(404).json({ message: 'No Comment Exists With This ID!' });
             return;
         }
-
-        res.status(200).json(blogPostData);
+        
+        res.status(200).json(commentData);
     } catch (err) {
         res.status(500).json(err);
     }

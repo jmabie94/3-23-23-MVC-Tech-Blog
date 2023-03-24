@@ -1,0 +1,22 @@
+[
+    {
+        "title": "This is a test Post",
+        "description": "Have you ever heard a story about Mary Maurie?",
+        "user_id": 1
+    },
+    {
+        "title": "Don't Test Me",
+        "description": "My therapist has encouraged me to stop drinking",
+        "user_id": 2
+    },
+    {
+        "title": "Testes",
+        "description": "I didn't listen to my therapist",
+        "user_id": 2
+    },
+    {
+        "title": "Say It With Your Chest",
+        "description": "Hey Brenda, we're here for you <3",
+        "user_id": 1
+    }
+]
