@@ -1,0 +1,22 @@
+<div id="homepage">
+    {{#each blogposts as |post|}}
+    <a id="single-post" href='/blogpost/{{blogpost.id}}'>
+        <div id="post-header">
+            <p id="post-title">{{blogpost.title}}</p>
+            <p id="post-date">Posted by {{blogpost.username}}
+                <br />
+                on {{format_date post.created_at}}
+            </p>
+        </div>
+        <div id="post-body">
+            <p id="blogtext">
+                {{post.description}}
+            </p>
+        </div>
+        <div id="post-comments">
+            {{commentLengths post.comments}}
+        </div>
+    </a>
+    {{/each}}
+</div>
+{{!-- add javascripts here --}}

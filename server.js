@@ -22,11 +22,15 @@ const sess = {
 
 app.use(session(sess));
 
-// const helpers?
-// const handlebar helpers?
+const helpers = require('./utils/helpers')
+const hndls = handlebars.create({ helpers });
+
+app.engine('handlebars', hndls.engine);
+app.set('view enginer', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
