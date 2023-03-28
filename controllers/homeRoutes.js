@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, BlogPost, Comment } = require('../models');
 
+/* need similar get route for /blogposts */
 router.get('/', async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findAll(
@@ -57,7 +58,7 @@ router.get('/', async (req, res) => {
     }
 }) */
 
-router.get('/blogpost/:id', async (req, res) => {
+router.get('/blogposts/:id', async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findOne({
             where: {

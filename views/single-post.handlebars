@@ -1,20 +1,66 @@
 <div id="single-page">
-    <a id="single-post" href='/blogposts/{{blogpost.id}}'>
-        <div id="post-header">
-            <p id="post-title">{{blogpost.title}}</p>
-            <p id="post-date">Posted by {{blogpost.username}}
-                <br />
-                on {{format_date blogpost.created_at}}
-            </p>
-        </div>
-         <div id="post-body">
-            <p id="blogtext">
-                {{blogpost.description}}
-            </p>
-        </div>
-        <div id="post-comments">
-            {{commentLengths blogpost.comments}}
-        </div>
-    </a>
+    <div id="post-header">
+        <p id="post-title">{{blogpost.title}}</p>
+        <p id="post-date">Posted by {{blogpost.username}}
+            <br />
+            on {{format_date blogpost.created_at}}
+        </p>
+    </div>
+    <div id="post-body">
+        <p id="blogtext">
+            {{blogpost.description}}
+        </p>
+    </div>
+    <form id="comment-form">
+        {{#if logged_in}}
+        <textarea id="comment-box" placeholder="Add a comment"></textarea>
+        <h1 id="comment-status">Comment must be at least 5 characters long.</h1>
+        <button type="submit">Submit</button>
+        {{else}}
+        <textarea id="comment-box" disabled="true" placeholder="You must be logged in to comment"></textarea>
+    </form>
+    <hr id="comment-divider">
+    <div id="comment-section">
+        {{#if blogpost.comments}}
+            {{#each blogpost.comments as |comment|}}
+                {{#if comment.usersComment}}
+                    <div id="single-comment" class="user-comment">
+                        <div id="comment-cleaner">
+                            <p id="new-comment-status">Comment must be at least 5 characters long.</p>
+                            <button 
+                            data-comment-id="{{comment.commentId}}" 
+                            id="confirm-comment-{{comment.commentId}}" 
+                            class="confirm-comment">Confirm
+                            </button>
+                            <button 
+                            data-comment-id="{{comment.commentId}}" 
+                            id="edit-comment-{{comment.commentId}}" 
+                            class="edit-comment">Edit
+                            </button>
+                            <button 
+                            data-comment-id="{{comment.commentId}}" 
+                            id="delete-comment-{{comment.commentId}}" 
+                            class="delete-comment">Delete
+                            </button>
+                        </div>
+                    </div>
+                {{else}}
+                    <div id="single-comment">
+                {{/if}}
+                        <div id="comment-wrap">
+                            <p id="user">{{comment.user}}</p>
+                            <p id="comment">{{comment.text}}</p>
+                        </div>
+                        <p id="comment-date">{{format_date comment.date}}</p>
+                    </div>
+            {{/each}}
+        {{else}}
+            <p>This blog post does not yet have any comments.</p>
+        {{/if}}
+        {{/if}}
+    </div>
 </div>
 {{!-- add javascripts here --}}
+<script src="/javascript/newcomment.js"></script>
+<script src="/javascript/editcomment.js"></script>
+<script src="/javascript/deletecomment.js"></script>

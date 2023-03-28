@@ -29,4 +29,4 @@ const loginFormHandler = async (event) => {
 };
 
 logForm.addEventListener('submit', loginFormHandler);
-signForm.addEventListener('submit', loginFormHandler);
+/* signForm.addEventListener('submit', loginFormHandler); */

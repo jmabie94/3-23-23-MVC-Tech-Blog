@@ -25,13 +25,17 @@
             <p id="post-date">{{format_date blogpost.date}}</p>
         </div>
         <p id="post-body">{{blogpost.description}}</p>
-        <div class="buttons">
-            <button id="editBtn">Edit Blog Post</button>
-            <button id="deleteBtn">Delete Blog Post</button>
-            <button id="commentsBtn">View Comments</button>
+        <div id="post-controls" class="buttons">
+            <button data-post-id="{{blogpost.postId}}" id="edit-post-{{blogpost.postId}}" class="edit-post-id">Edit Blog Post</button>
+            <button data-post-id="{{blogpost.postId}}" id="delete-post-{{blogpost.postId}}" class="delete-post-id">Delete Blog Post</button>
+            <button data-post-id="{{blogpost.postId}}" id="view-comments-{{blogpost.postId}}" class="view-comments">View Comments</button>
+            {{!-- <button data-post-id="{{blogpost.postId}}" id="confirm-post-{{blogpost.postId}}" class="confirm-post">Confirm</button> --}}
         </div>
     </div>
     {{/each}}
 </div>
 {{!-- add javascripts here --}}
-<script src="../public/javascript/newpost.js"></script>
+<script src="/javascript/newpost.js"></script>
+<script src="/javascript/editpost.js"></script>
+<script src="/javascript/deletepost.js"></script>
+<script src="/javascript/viewcomments.js"></script>

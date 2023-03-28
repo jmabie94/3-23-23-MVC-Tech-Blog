@@ -26,7 +26,7 @@ const helpers = require('./utils/helpers')
 const hndls = handlebars.create({ helpers });
 
 app.engine('handlebars', hndls.engine);
-app.set('view enginer', 'handlebars');
+app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
