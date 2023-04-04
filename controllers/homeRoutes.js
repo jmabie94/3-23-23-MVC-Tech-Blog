@@ -29,23 +29,13 @@ router.get('/', async (req, res) => {
         );
 
         const blogposts = dbBlogPostData.map((blogpost) => blogpost.get({ plain: true }));
-        console.log(blogposts);
-        // need help displaying the number of comments each blogpost has
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        // also need help cleaning up the way the created_at date/time is displayed
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-        /* console.log('specifiy', blogposts.comments.length); */
+        /* console.log(blogposts); */
         blogposts.reverse();
 
         res.render('homepage', {
             blogposts,
             logged_in: req.session.logged_in,
             username: req.session.username,
-            /* not entirely certain about this format: */
-            /* commentquantity: blogposts.comments.length, */
-            /* will test, might need to be dataValues parameter */
         });
     } catch (err) {
         console.log(err);
@@ -89,7 +79,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
             ],
         });
         
-        const blogposts = [];
+        // don't think I need this
+        /* const blogposts = [];
 
         if (allUserPosts.length == 1) {
             const title = allUserPosts[0].dataValues.title;
@@ -105,7 +96,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
                 const postId = blogpost.dataValues.id;
                 blogposts.push({ postId, title, description, date });
             });
-        }
+        } */
+
+        const blogposts = allUserPosts.map((blogpost) => blogpost.get({ plain: true }));
 
         blogposts.reverse();
 
@@ -171,7 +164,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
 });
 
 // loads specifc blogpost based on its ID
-router.get('/blogposts/:id', async (req, res) => {
+router.get('/blogposts/:id', withAuth, async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findOne({
             where: {
@@ -184,24 +177,26 @@ router.get('/blogposts/:id', async (req, res) => {
                     attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                     include: {
                         model: User,
-                        attributes: ['username'],
+                        attributes: ['id', 'username'],
                     },
                 },
                 {
                     model: User,
-                    attributes: ['username'],
+                    attributes: ['id', 'username'],
                 },
             ],
         });
 
         const title = dbBlogPostData.dataValues.title;
         const user = dbBlogPostData.dataValues.user.username;
+        const user_id = dbBlogPostData.dataValues.user.id;
         const date = dbBlogPostData.dataValues.created_at;
         const description = dbBlogPostData.dataValues.description;
-        const post = {
+        const blogPost = {
             title,
             date,
             user,
+            user_id,
             description,
             comments: [],
         };
@@ -213,7 +208,7 @@ router.get('/blogposts/:id', async (req, res) => {
             let userId = dbBlogPostData.dataValues.comments[i].dataValues.user_id;
             let commentId = dbBlogPostData.dataValues.comments[i].dataValues.id;
 
-            post.comments.push({
+            blogPost.comments.push({
                 user: username,
                 userId: userId,
                 text: commentText,
@@ -224,7 +219,7 @@ router.get('/blogposts/:id', async (req, res) => {
         };
 
         res.render('single-post', {
-            post,
+            blogPost,
             logged_in: req.session.logged_in,
             username: req.session.username,
         });
@@ -272,6 +267,7 @@ main.handlebars
 post-details.handlebars
 user-details.handlebars
 comment-details.handlebars
+newpost-details.handlebars
 >
 homepage.handlebars
 dashboard.handlebars

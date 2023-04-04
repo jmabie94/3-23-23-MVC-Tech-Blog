@@ -1,23 +1,23 @@
 <table class="table is-bordered is-striped is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <th><abbr title="Post ID Number">PID</abbr></th>
+            {{!-- <th><abbr title="Post ID Number">PID</abbr></th> --}}
             <th>Username</th>
-            <th><abbr title="User ID Number">UID</abbr></th>
+            {{!-- <th><abbr title="User ID Number">UID</abbr></th> --}}
             <th>Blog Post Title</th>
-            <th><abbr title="Date Created">D/T</abbr></th>
-            {{!-- <th><abbr title="Number of Comments">Comments</abbr></th> --}}
+            <th><abbr title="Date Created">Date</abbr></th>
+            <th><abbr title="Number of Comments">Comments</abbr></th>
             <th>Blog Post Content</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th><abbr title="Post ID Number">PID</abbr></th>
+            {{!-- <th><abbr title="Post ID Number">PID</abbr></th> --}}
             <th>Username</th>
-            <th><abbr title="User ID Number">UID</abbr></th>
+            {{!-- <th><abbr title="User ID Number">UID</abbr></th> --}}
             <th>Blog Post Title</th>
-            <th><abbr title="Date Created">D/T</abbr></th>
-            {{!-- <th><abbr title="Number of Comments">Comments</abbr></th> --}}
+            <th><abbr title="Date Created">Date</abbr></th>
+            <th><abbr title="Number of Comments">Comments</abbr></th>
             <th>Blog Post Content</th>
         </tr>
     </tfoot>
@@ -25,23 +25,23 @@
         {{#if blogposts}}
         {{#each blogposts as |blogpost|}}
         <tr>
-            <th>{{blogpost.id}}</th>
-            <th><a href="/user/{{blogpost.user.id}}"></a>{{blogpost.user.username}}</th>
-            <th>{{blogpost.user_id}}</th>
-            <th><a href="/blogposts/{{blogpost.id}}"></a>{{blogpost.title}}</th>
-            <th>{{blogpost.created_at}}</th>
-            {{!-- <th>{{commentquantity}}</th> --}}
+            {{!-- <th>{{blogpost.id}}</th> --}}
+            <td><a href="/user/{{blogpost.user.id}}">{{blogpost.user.username}}</a></td>
+            {{!-- <th>{{blogpost.user_id}}</th> --}}
+            <td><a href="/blogposts/{{blogpost.id}}">{{blogpost.title}}</a></td>
+            <th>{{format_date blogpost.created_at}}</th>
+            <th>{{blogpost.comments.length}}</th>
             <th>{{blogpost.description}}</th>
         </tr>
         {{/each}}
         {{else}}
         <tr>
-            <th>N/A</th>
-            <th>No Blog Posts Exist Yet</th>
-            <th>N/A</th>
-            <th><a href="/newpost"></a>Create The First Blog Post!</th>
-            <th>N/A</th>
             {{!-- <th>N/A</th> --}}
+            <th>No Blog Posts Exist Yet</th>
+            {{!-- <th>N/A</th> --}}
+            <th><a href="/newpost">Create The First Blog Post!</a></th>
+            <th>N/A</th>
+            <th>N/A</th>
             <th>Once Blog Posts Have Been Created They Will Appear Here</th>
         </tr>
         {{/if}}

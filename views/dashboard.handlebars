@@ -1,0 +1,50 @@
+<h2 class="title is-2">Here is Your Dashboard, {{username}}</h2>
+<h4 class="subtitle is-4">View All Your Blog Posts Below:</h4>
+<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <thead>
+        <tr>
+            <th>Blog Post Title</th>
+            <th><abbr title="Date Created">Date</abbr></th>
+            <th><abbr title="Number of Comments">Comments</abbr></th>
+            <th>Blog Post Content</th>
+            {{#if blogposts}}
+            <th>Edit</th>
+            <th>Delete</th>
+            {{/if}}
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Blog Post Title</th>
+            <th><abbr title="Date Created">Date</abbr></th>
+            <th><abbr title="Number of Comments">Comments</abbr></th>
+            <th>Blog Post Content</th>
+            {{#if blogposts}}
+            <th>Edit</th>
+            <th>Delete</th>
+            {{/if}}
+        </tr>
+    </tfoot>
+    <tbody>
+        {{#if blogposts}}
+        {{#each blogposts as |blogpost|}}
+        <tr>
+            <td><a href="/blogposts/{{blogpost.id}}">{{blogpost.title}}</a></td>
+            <th>{{format_date blogpost.created_at}}</th>
+            <th>{{blogpost.comments.length}}</th>
+            <th>{{blogpost.description}}</th>
+            <td><button class="button is-light editPostBtn">Edit Post</button></td>
+            <td><button class="button is-danger deletePostBtn">Delete Post</button></td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr>
+            <th><a href="/newpost">Create Your First Blog Post!</a></th>
+            <th>N/A</th>
+            <th>N/A</th>
+            <th>Once You Have Blog Posts They Will Appear Here</th>
+        </tr>
+        {{/if}}
+    </tbody>
+</table>
+{{!-- need javascript logo added here --}}
