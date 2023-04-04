@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
 router.get('/newpost', withAuth, async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
-            attributes: ['id', 'name']
+            attributes: ['id', 'username']
         });
         res.render('blog', {
             logged_in: req.session.logged_in,
@@ -105,6 +105,27 @@ router.get('/dashboard', withAuth, async (req, res) => {
             username: req.session.username,
         });
 
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// show all users as hyperlinks that route to user/:id routing
+router.get('/allusers', withAuth, async (req, res) => {
+    try {
+        const allUserData = await User.findAll({
+            attributes: ['id', 'username'],
+        });
+
+        const allUsers = allUserData.users.map((user) => user.get({ plain: true }));
+        console.log(allUsers);
+
+        res.render('user-directory', {
+            allUsers,
+            logged_in: req.session.logged_in,
+            user: allUserData.dataValues,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -226,11 +247,18 @@ module.exports = router;
 
 // views needed:
 /* 
+> layouts
 main.handlebars
+> partials
+post-details.handlebars
+user-details.handlebars
+comment-details.handlebars
+>
 homepage.handlebars
 dashboard.handlebars
 login.handlebars
 blog.handlebars
+user-directory.handlebars
 single-post.handlebars
 single-user.handlebars 
 */

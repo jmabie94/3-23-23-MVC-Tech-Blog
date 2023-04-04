@@ -36,27 +36,22 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 <a class="navbar-item" href='/dashboard'>
-                    Dashboard
+                    Your Dashboard
                 </a>
 
                 <a class="navbar-item" href='/blogposts'>
                     View All Blog Posts
                 </a>
 
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                    View Blog Posts By User
-                    </a>
+                {{!-- adjusting to add /newpost and /allusers instead of dropdown --}}
 
-                    <div class="navbar-dropdown">
-                        {{!-- will need to be tested --}}
-                    {{#each User.username as |user| }}
-                    <a class="navbar-item">
-                        {{user}}
-                    </a>
-                    {{/each}}
-                    </div>
-                </div>
+                <a class="navbar-item" href="/newpost">
+                    Create New Blog Post
+                </a>
+
+                <a class="navbar-item" href="/allusers">
+                    View Blog Posts By User
+                </a>
             </div>
             
             <div class="navbar-end">
