@@ -22,20 +22,30 @@ router.get('/', async (req, res) => {
                     },
                     {
                         model: User,
-                        attributes: ['username'],
+                        attributes: ['id', 'username'],
                     },
                 ],
             }
         );
 
         const blogposts = dbBlogPostData.map((blogpost) => blogpost.get({ plain: true }));
+        console.log(blogposts);
+        // need help displaying the number of comments each blogpost has
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+        // also need help cleaning up the way the created_at date/time is displayed
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+        /* console.log('specifiy', blogposts.comments.length); */
         blogposts.reverse();
 
         res.render('homepage', {
             blogposts,
             logged_in: req.session.logged_in,
             username: req.session.username,
+            /* not entirely certain about this format: */
+            /* commentquantity: blogposts.comments.length, */
+            /* will test, might need to be dataValues parameter */
         });
     } catch (err) {
         console.log(err);
@@ -231,6 +241,15 @@ router.get('/login', (req, res) => {
     }
 
     res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('signup');
 });
 
 router.get('/logout', (req, res) => {
