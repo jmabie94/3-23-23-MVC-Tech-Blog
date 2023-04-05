@@ -28,9 +28,12 @@ const loginFormHandler = async (event) => {
     }
 };
 
+const signupRedirectHandler = async (event) => {
+  event.preventDefault();
+  // if they don't have an existing login, click Sign Up to redirect to the Sign Up page
+  document.location.replace('/signup');
+};
+
 logForm.addEventListener('submit', loginFormHandler);
 
-signupBtn.addEventListener('click', function(){
-  // TODO: navigate to signup page!
-})
-/* signForm.addEventListener('submit', loginFormHandler); */
+signupBtn.addEventListener('click', signupRedirectHandler);

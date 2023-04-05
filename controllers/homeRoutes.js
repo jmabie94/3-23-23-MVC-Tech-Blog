@@ -52,6 +52,7 @@ router.get('/newpost', withAuth, async (req, res) => {
         res.render('blog', {
             logged_in: req.session.logged_in,
             user: userData.dataValues,
+            username: req.session.username,
         });
     } catch (err) {
         console.log(err);
@@ -128,6 +129,7 @@ router.get('/allusers', withAuth, async (req, res) => {
             allUsers,
             logged_in: req.session.logged_in,
             user: allUserData.dataValues,
+            username: req.session.username,
         });
     } catch (err) {
         console.log(err);
@@ -156,6 +158,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
             userBlogPosts,
             logged_in: req.session.logged_in,
             user: userBlogPostData.dataValues,
+            username: req.session.username,
         });
     } catch (err) {
         console.log(err);

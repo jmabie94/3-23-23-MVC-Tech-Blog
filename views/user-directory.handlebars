@@ -1,0 +1,39 @@
+<h2 class="title is-2">User Directory</h2>
+<h4 class="subtitle is-4">See Who Else Is Posting!</h4>
+<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Blog Post Count</th>
+            <th>Comment Count</th>
+            <th>User Since</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Username</th>
+            <th>Blog Post Count</th>
+            <th>Comment Count</th>
+            <th>User Since</th>
+        </tr>
+    </tfoot>
+    <tbody>
+    {{#if allUsers}}
+    {{#each allUsers as |user|}}
+    <tr>
+        <td><a href="/user/{{user.id}}">{{user.username}}</a></td>
+        <td>{{user.blogposts.length}}</td>
+        <td>{{user.comments.length}}</td>
+        <td>{{format_date user.created_at}}</td>
+    </tr>
+    {{/each}}
+    {{else}}
+    <tr>
+        <td><a href="/signup">Become The First User!</a></td>
+        <td><a href="/newpost">Create The First Blog Post!</a></td>
+        <td>N/A</td>
+        <td>N/A</td>
+    </tr>
+    {{/if}}
+    </tbody>
+</table>
