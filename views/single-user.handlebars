@@ -1,0 +1,64 @@
+<h2 class="title is-2">{{user.username}}'s Profile</h2>
+{{#if userBlogPosts}}
+<h4 class="subtitle is-4">{{user.username}}'s Blog Posts</h4>
+{{#each userBlogPosts as |blogpost|}}
+<div class="card">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <img src="/images/whosethot.png" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="media-content">
+                <p class="title is-2">{{user.username}}</p>
+                <p class="subtitle is-4">
+                    <a href="/blogposts/{{blogpost.id}}">{{blogpost.title}}</a>
+                </p>
+            </div>
+        </div>
+        <div class="content">
+            {{blogpost.description}}
+            <br>
+            <p>Date Posted: {{format_date blogpost.createdAt}}</p>
+        </div>
+        <footer class="card-footer">
+            {{#if blogpost.comments}}
+            <div class="card-comments">
+                {{#each blogpost.comments as |comment|}}
+                <div class="comment-title">
+                    <p class="title is-4">{{comment.user}}</p>
+                    <p class="subtitle is-6">{{comment.date}}</p>
+                </div>
+                {{#if comment.usersComment}}
+                <div class="comment-content is-highlighted">
+                    {{comment.text}}
+                </div>
+                <div>
+                    <button class="button is-light editCommentBtn">Edit Comment
+                    </button>
+                    <button class="button is-danger deleteCommentBtn">Delete Comment
+                    </button>
+                </div>
+                <br>
+                {{else}}
+                <div class="comment-content">
+                    {{comment.text}}
+                </div>
+                <br>
+                {{/if}}
+                {{/each}}
+                <button class="button is-primary addCommentBtn">Add a Comment</button>
+                {{else}}
+                <button class="button is-primary addCommentBtn">Add the First Comment!</button>
+                {{/if}}
+            </div>
+        </footer>
+    </div>
+</div>
+{{/each}}
+{{else}}
+<div>
+    <h4 class="subtitle is-4">{{user.username}} Has No Blog Posts Yet</h4>
+</div>
+{{/if}}

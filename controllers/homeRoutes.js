@@ -190,7 +190,10 @@ router.get('/blogposts/:id', withAuth, async (req, res) => {
         const title = dbBlogPostData.dataValues.title;
         const user = dbBlogPostData.dataValues.user.username;
         const user_id = dbBlogPostData.dataValues.user.id;
-        const date = dbBlogPostData.dataValues.created_at;
+        const date = dbBlogPostData.dataValues.createdAt;
+        // TODO: why is this camelcase as opposed to snake case???
+        console.log("dbBlogPostData.dataValues: ", dbBlogPostData.dataValues);
+        /* debugger; in case need to stop right where you're looking for something*/
         const description = dbBlogPostData.dataValues.description;
         const blogPost = {
             title,
@@ -214,7 +217,7 @@ router.get('/blogposts/:id', withAuth, async (req, res) => {
                 text: commentText,
                 date: commentDate,
                 commentId: commentId,
-                usersComment: username == req.session.username,
+                usersComment: username === req.session.username,
             });
         };
 

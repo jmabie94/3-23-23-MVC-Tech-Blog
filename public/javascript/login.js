@@ -1,5 +1,5 @@
 const logForm = document.getElementById('login-form');
-const signForm = document.getElementById('signup-form');
+const signupBtn = document.getElementById('signup-btn');
 const statusEl = document.getElementById('status');
 
 const loginFormHandler = async (event) => {
@@ -29,4 +29,8 @@ const loginFormHandler = async (event) => {
 };
 
 logForm.addEventListener('submit', loginFormHandler);
+
+signupBtn.addEventListener('click', function(){
+  // TODO: navigate to signup page!
+})
 /* signForm.addEventListener('submit', loginFormHandler); */

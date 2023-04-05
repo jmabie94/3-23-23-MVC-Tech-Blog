@@ -39,9 +39,9 @@
                     Your Dashboard
                 </a>
 
-                <a class="navbar-item" href='/blogposts'>
+                {{!-- <a class="navbar-item" href='/blogposts'>
                     View All Blog Posts
-                </a>
+                </a> --}}
 
                 {{!-- adjusting to add /newpost and /allusers instead of dropdown --}}
 
@@ -58,11 +58,12 @@
                 {{!-- if the user is logged in, show user name and only display log out button; if user is not logged in show only buttons to sign up or log in --}}
             {{#if logged_in}}
                 <div class="navbar-item">
-                    Logged in as <strong>{{username}}</strong>
+                    {{!-- need to set username on all routes so that this works consistently --}}
+                    Logged in as&nbsp;<strong>{{username}}</strong>
                 </div>
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-light logoutBtn">
+                        <a id="logout" class="button is-light logoutBtn">
                             Log Out
                         </a>
                     </div>
@@ -90,7 +91,6 @@
     <footer>
 
     </footer>
-    <script src="/javascript/login.js"></script>
     <script src="/javascript/logout.js"></script>
 </html>
 {{!-- add javascript sources --}}
