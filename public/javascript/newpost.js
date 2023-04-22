@@ -21,13 +21,17 @@ const newPostHandler = async (event) => {
         const response = await fetch('/api/blogposts', {
             method: 'POST',
             body: JSON.stringify({
-                postTitle,
-                postDesc,
+                title: postTitle,
+                description: postDesc,
             }),
             headers: {
                 'Content-Type': 'application/json',
             },
         });
+
+        // to test results and get errors
+        const result = await response.json();
+        console.log(result);
 
         if (response.ok) {
             postStatusEl.textContent = "Blogpost Created Successfully!";
